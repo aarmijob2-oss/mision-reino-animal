@@ -148,24 +148,10 @@
             document.getElementById('songModal').classList.toggle('hidden', !show);
         }
 
-        function playAnthem() {
-            try {
-                const ctx = new (window.AudioContext || window.webkitAudioContext)();
-                const notes = [330.00, 392.00, 440.00, 493.88, 523.25];
-                notes.forEach((freq, index) => {
-                    const osc = ctx.createOscillator();
-                    const gain = ctx.createGain();
-                    osc.type = 'triangle';
-                    osc.frequency.value = freq;
-                    gain.gain.setValueAtTime(0.1, ctx.currentTime + index * 0.22);
-                    gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + index * 0.22 + 0.18);
-                    osc.connect(gain);
-                    gain.connect(ctx.destination);
-                    osc.start(ctx.currentTime + index * 0.22);
-                    osc.stop(ctx.currentTime + index * 0.22 + 0.18);
-                });
-            } catch(e) { console.log(e); }
-        }
+       function playAnthem() {
+    const audio = new Audio('cancion.mp3');
+    audio.play();
+}
 
         function startGame() {
             currentQuestion = 0;
