@@ -48,8 +48,8 @@
                     <i class="fa-solid fa-compact-disc text-xl text-emerald-600"></i> Himno Pedagógico Oficial
                 </p>
                 <div class="flex gap-2 w-full justify-center">
-                    <button onclick="playAnthem()" class="bg-emerald-600 text-white px-4 py-2 rounded-lg font-bold text-sm hover:bg-emerald-700 transition flex items-center gap-2">
-                        <i class="fa-solid fa-play"></i> Reproducir Himno
+                    <button id="anthemBtn" onclick="playAnthem()" class="bg-emerald-600 text-white px-4 py-2 rounded-lg font-bold text-sm hover:bg-emerald-700 transition flex items-center gap-2">
+                        <i class="fa-solid fa-play" id="anthemIcon"></i> <span id="anthemText">Reproducir Himno</span>
                     </button>
                     <button onclick="toggleModal(true)" class="bg-white text-emerald-600 border border-emerald-200 px-4 py-2 rounded-lg font-bold text-sm hover:bg-emerald-50 transition">
                         Ver Letra Completa
@@ -143,17 +143,44 @@
         let currentQuestion = 0;
         let score = 0;
         let lives = 3;
+        let anthemAudio = null;
 
         function toggleModal(show) {
             document.getElementById('songModal').classList.toggle('hidden', !show);
         }
 
-       function playAnthem() {
-    const audio = new Audio('cancion.mp3');
-    audio.play();
-}
+        function playAnthem() {
+            const icon = document.getElementById('anthemIcon');
+            const text = document.getElementById('anthemText');
+
+            if (anthemAudio && !anthemAudio.paused) {
+                anthemAudio.pause();
+                anthemAudio.currentTime = 0;
+                icon.className = 'fa-solid fa-play';
+                text.innerText = 'Reproducir Himno';
+            } else {
+                if (!anthemAudio) {
+                    anthemAudio = new Audio('cancion.mp3');
+                    anthemAudio.onended = () => {
+                        icon.className = 'fa-solid fa-play';
+                        text.innerText = 'Reproducir Himno';
+                    };
+                }
+                anthemAudio.play();
+                icon.className = 'fa-solid fa-pause';
+                text.innerText = 'Pausar Himno';
+            }
+        }
 
         function startGame() {
+            // Pausar audio al iniciar el juego
+            if (anthemAudio) {
+                anthemAudio.pause();
+                anthemAudio.currentTime = 0;
+                document.getElementById('anthemIcon').className = 'fa-solid fa-play';
+                document.getElementById('anthemText').innerText = 'Reproducir Himno';
+            }
+
             currentQuestion = 0;
             score = 0;
             lives = 3;
