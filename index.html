@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Misión: El Rescate del Agua</title>
+    <title>Misión: El Reino Animal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -13,20 +13,21 @@
         .glass { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
     </style>
 </head>
-<body class="bg-gradient-to-br from-cyan-500 via-blue-600 to-indigo-900 min-h-screen flex items-center justify-center p-4">
+<body class="bg-gradient-to-br from-emerald-500 via-teal-600 to-green-900 min-h-screen flex items-center justify-center p-4">
 
     <!-- Modal Letra de la Canción -->
     <div id="songModal" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-lg w-full p-6 relative max-h-[80vh] overflow-y-auto">
             <button onclick="toggleModal(false)" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl font-bold">&times;</button>
-            <h3 class="text-2xl font-bold text-blue-600 mb-4 flex items-center gap-2">
-                <i class="fa-solid fa-music"></i> Letra: Los Guardianes del Agua
+            <h3 class="text-2xl font-bold text-emerald-600 mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-music"></i> Letra: El Reino Animal
             </h3>
             <div class="space-y-4 text-gray-700 text-sm leading-relaxed">
-                <p><strong>(Verso 1)</strong><br>El sol calienta el mar, empieza el gran viaje,<br>el agua sube al cielo buscando otro paisaje.<br>Se vuelve vapor fino, no la puedes mirar,<br>es la <strong>Evaporación</strong> que empieza a volar.</p>
-                <p><strong>(Pre-Coro)</strong><br>En lo alto hace frío, se vuelven a juntar,<br>gotitas en las nubes empiezan a bailar.<br><strong>Condensación</strong> se llama este bello disfraz,<br>¡preparen los escudos, la lluvia viene ya!</p>
-                <p><strong>(Coro)</strong><br>¡Somos los Guardianes del Planeta Azul!<br>Siguiendo la corriente con fuerza y con luz.<br>De la nube hasta el río, del río hasta el mar,<br>¡el ciclo de la vida vamos a completar!</p>
-                <p><strong>(Verso 2)</strong><br>La nube ya pesa tanto que no aguantará más,<br>cae como <strong>Precipitación</strong>, lluvia o nieve verás.<br>Por la <strong>Infiltración</strong> la tierra va a beber,<br>y por la <strong>Escorrentía</strong> al océano a volver.</p>
+                <p><strong>(Verso 1)</strong><br>En la tierra, el cielo y el ancho mar,<br>miles de animales vas a encontrar.<br>Unos llevan huesos que les dan firmeza,<br>sostienen su cuerpo de pies a cabeza.</p>
+                <p><strong>(Pre-Coro)</strong><br>Mamíferos, aves y peces también,<br>reptiles y anfibios los forman muy bien.<br>Tienen columna, espina dorsal,<br>¡son los <strong>Vertebrados</strong> del reino animal!</p>
+                <p><strong>(Coro)</strong><br>¡Con esqueleto o sin esqueleto!<br>El reino animal merece respeto.<br>Con columna fuerte o cuerpo muy blando,<br>¡vamos a explorar qué están haciendo!</p>
+                <p><strong>(Verso 2)</strong><br>Pero hay otros seres que no tienen huesos,<br>ágiles y pequeños, ¡sorprenden por eso!<br>Insectos, moluscos y arácnidos son,<br>gusanos y esponjas en esta canción.</p>
+                <p><strong>(Puente)</strong><br>Los <strong>Invertebrados</strong> no tienen espina,<br>vuelan, se arrastran o nadan en la esquina.<br>Son la gran mayoría de este planeta Azul,<br>¡resuelve el misterio con ciencia y con luz!</p>
             </div>
         </div>
     </div>
@@ -36,38 +37,38 @@
 
         <!-- PANTALLA DE INICIO -->
         <div id="startScreen" class="p-8 text-center space-y-6">
-            <div class="inline-block p-4 bg-cyan-100 rounded-full text-cyan-600 text-5xl mb-2 animate-bounce">
-                <i class="fa-solid fa-water"></i>
+            <div class="inline-block p-4 bg-emerald-100 rounded-full text-emerald-600 text-5xl mb-2 animate-bounce">
+                <i class="fa-solid fa-paw"></i>
             </div>
-            <h1 class="text-4xl font-extrabold text-blue-900 tracking-wide">Misión: El Rescate del Agua</h1>
-            <p class="text-gray-600 text-lg">¡Conviértete en un Guardián del Planeta Azul y completa los 10 retos del ciclo del agua para salvar el ecosistema!</p>
+            <h1 class="text-4xl font-extrabold text-emerald-900 tracking-wide">Misión: Vertebrados e Invertebrados</h1>
+            <p class="text-gray-600 text-lg">¡Conviértete en un Zoólogo Experto y supera los 10 retos para clasificar a los animales del planeta!</p>
             
-            <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 flex flex-col items-center gap-3">
-                <p class="text-sm text-blue-800 font-semibold flex items-center gap-2">
-                    <i class="fa-solid fa-compact-disc text-xl text-blue-600"></i> Himno Pedagógico Oficial
+            <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4 flex flex-col items-center gap-3">
+                <p class="text-sm text-emerald-800 font-semibold flex items-center gap-2">
+                    <i class="fa-solid fa-compact-disc text-xl text-emerald-600"></i> Himno Pedagógico Oficial
                 </p>
                 <div class="flex gap-2 w-full justify-center">
-                    <button onclick="playAnthem()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg font-bold text-sm hover:bg-indigo-700 transition flex items-center gap-2">
+                    <button onclick="playAnthem()" class="bg-emerald-600 text-white px-4 py-2 rounded-lg font-bold text-sm hover:bg-emerald-700 transition flex items-center gap-2">
                         <i class="fa-solid fa-play"></i> Reproducir Himno
                     </button>
-                    <button onclick="toggleModal(true)" class="bg-white text-indigo-600 border border-indigo-200 px-4 py-2 rounded-lg font-bold text-sm hover:bg-indigo-50 transition">
-                        Ver Letra
+                    <button onclick="toggleModal(true)" class="bg-white text-emerald-600 border border-emerald-200 px-4 py-2 rounded-lg font-bold text-sm hover:bg-emerald-50 transition">
+                        Ver Letra Completa
                     </button>
                 </div>
             </div>
 
-            <button onclick="startGame()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xl py-4 rounded-2xl shadow-lg hover:scale-105 transition transform">
-                ¡INICIAR MISIÓN! <i class="fa-solid fa-arrow-right ml-2"></i>
+            <button onclick="startGame()" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-extrabold text-xl py-4 rounded-2xl shadow-lg hover:scale-105 transition transform">
+                ¡INICIAR EXPLORACIÓN! <i class="fa-solid fa-arrow-right ml-2"></i>
             </button>
         </div>
 
         <!-- PANTALLA DEL JUEGO -->
         <div id="gameScreen" class="hidden p-8">
             <!-- Barra Superior de Estado -->
-            <div class="flex justify-between items-center mb-6 bg-white/60 p-4 rounded-xl border border-blue-100">
+            <div class="flex justify-between items-center mb-6 bg-white/60 p-4 rounded-xl border border-emerald-100">
                 <div>
                     <span class="text-xs text-gray-500 block uppercase font-bold">Progreso</span>
-                    <span id="levelIndicator" class="text-lg font-bold text-blue-800">Reto 1/10</span>
+                    <span id="levelIndicator" class="text-lg font-bold text-emerald-800">Reto 1/10</span>
                 </div>
                 <div>
                     <span class="text-xs text-gray-500 block uppercase font-bold text-center">Vidas</span>
@@ -81,7 +82,7 @@
 
             <!-- Barra de Progreso Visual -->
             <div class="w-full bg-gray-200 h-3 rounded-full mb-6 overflow-hidden">
-                <div id="progressBar" class="bg-cyan-500 h-full w-10 transition-all duration-300"></div>
+                <div id="progressBar" class="bg-emerald-500 h-full w-10 transition-all duration-300"></div>
             </div>
 
             <!-- Pregunta -->
@@ -94,7 +95,7 @@
             <div id="feedbackBox" class="hidden p-4 rounded-xl text-center font-bold mb-4"></div>
 
             <!-- Botón Siguiente -->
-            <button id="nextBtn" onclick="nextQuestion()" class="hidden w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition">
+            <button id="nextBtn" onclick="nextQuestion()" class="hidden w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition">
                 Siguiente Reto <i class="fa-solid fa-chevron-right ml-2"></i>
             </button>
         </div>
@@ -102,23 +103,23 @@
         <!-- PANTALLA FINAL -->
         <div id="endScreen" class="hidden p-8 text-center space-y-6">
             <div id="badgeIcon" class="text-6xl text-amber-400 my-2">
-                <i class="fa-solid fa-award"></i>
+                <i class="fa-solid fa-medal"></i>
             </div>
-            <h2 id="endTitle" class="text-3xl font-extrabold text-blue-900">¡Misión Completada!</h2>
+            <h2 id="endTitle" class="text-3xl font-extrabold text-emerald-900">¡Exploración Completada!</h2>
             <p id="endSubtitle" class="text-gray-600"></p>
 
-            <div class="bg-white/80 rounded-2xl p-6 border border-blue-100 grid grid-cols-2 gap-4">
-                <div class="p-3 bg-blue-50 rounded-xl">
+            <div class="bg-white/80 rounded-2xl p-6 border border-emerald-100 grid grid-cols-2 gap-4">
+                <div class="p-3 bg-emerald-50 rounded-xl">
                     <span class="block text-xs text-gray-500 font-bold uppercase">Puntaje Final</span>
-                    <span id="finalScore" class="text-3xl font-black text-blue-600">0</span>
+                    <span id="finalScore" class="text-3xl font-black text-emerald-600">0</span>
                 </div>
-                <div class="p-3 bg-indigo-50 rounded-xl">
+                <div class="p-3 bg-teal-50 rounded-xl">
                     <span class="block text-xs text-gray-500 font-bold uppercase">Precisión</span>
-                    <span id="accuracyText" class="text-3xl font-black text-indigo-600">0%</span>
+                    <span id="accuracyText" class="text-3xl font-black text-teal-600">0%</span>
                 </div>
             </div>
 
-            <button onclick="startGame()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-lg transition">
+            <button onclick="startGame()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-xl shadow-lg transition">
                 <i class="fa-solid fa-rotate-right ml-2"></i> Jugar de Nuevo
             </button>
         </div>
@@ -127,16 +128,16 @@
 
     <script>
         const questions = [
-            { question: "¿Qué proceso ocurre cuando el sol calienta el agua del mar y la convierte en vapor?", options: ["Condensación", "Evaporación", "Precipitación", "Infiltración"], correct: 1, feedback: "¡Correcto! La evaporación ocurre cuando el agua pasa de líquido a gas por calor." },
-            { question: "¿Cómo se llama la etapa donde el vapor se enfría y forma las nubes?", options: ["Evaporación", "Transpiración", "Condensación", "Escorrentía"], correct: 2, feedback: "¡Excelente! Al enfriarse, el vapor se condensa formando gotas de agua que crean nubes." },
-            { question: "Cuando cae agua de las nubes en forma de lluvia, nieve o granizo, estamos viendo:", options: ["Precipitación", "Filtración", "Condensación", "Evaporación"], correct: 0, feedback: "¡Muy bien! Cualquier forma de agua que cae de las nubes se llama precipitación." },
-            { question: "¿Qué nombre recibe el agua que se desliza por las laderas hasta llegar a los ríos?", options: ["Infiltración", "Escorrentía", "Evaporación", "Sublimación"], correct: 1, feedback: "¡Así es! La escorrentía es el flujo de agua por la superficie del suelo." },
-            { question: "¿Cómo entra el agua de lluvia al subsuelo para formar acuíferos subterráneos?", options: ["Infiltración", "Condensación", "Precipitación", "Congelación"], correct: 0, feedback: "¡Correcto! El suelo absorbe el agua mediante la infiltración." },
-            { question: "¿Cuál de los siguientes es un cuerpo de agua dulce en la superficie?", options: ["Océano Atlántico", "Río Amazonas", "Mar Caribe", "Océano Pacífico"], correct: 1, feedback: "¡Exacto! Los ríos contienen agua dulce esencial para la vida terrestre." },
-            { question: "¿Dónde se encuentra retenida la mayor parte del agua dulce del planeta?", options: ["En los ríos", "En las nubes", "En los glaciares y polos", "En los lagos"], correct: 2, feedback: "¡Correcto! Alrededor del 68% del agua dulce está congelada en glaciares." },
-            { question: "¿Qué acción ayuda a cuidar el agua en nuestro hogar?", options: ["Dejar el grifo abierto", "Reparar las fugas de agua", "Tirar basura al río", "Regar el jardín a mediodía"], correct: 1, feedback: "¡Excelente! Reparar fugas evita el desperdicio de litros de agua." },
-            { question: "Las plantas absorben agua por sus raíces y la liberan como vapor por sus hojas. Esto es:", options: ["Transpiración", "Absorción", "Fotosíntesis", "Filtración"], correct: 0, feedback: "¡Bien pensado! La transpiración integra el aporte de las plantas al ciclo." },
-            { question: "¿Por qué se dice que el ciclo del agua es un 'ciclo'?", options: ["Porque ocurre una sola vez", "Porque se detiene en el mar", "Porque se repite continuamente sin inicio ni fin", "Porque solo funciona en verano"], correct: 2, feedback: "¡Fantástico! El agua se recicla constantemente en la Naturaleza." }
+            { question: "¿Cuál es la característica principal de los animales VERTEBRADOS?", options: ["Tienen antena", "Tienen columna vertebral y esqueleto interno", "No tienen huesos", "Viven únicamente bajo la tierra"], correct: 1, feedback: "¡Correcto! Los vertebrados poseen un esqueleto interno articulado con columna vertebral." },
+            { question: "¿A qué grupo de vertebrados pertenece un perro o un delfín?", options: ["Peces", "Reptiles", "Mamíferos", "Anfibios"], correct: 2, feedback: "¡Excelente! Son mamíferos: nacen del vientre materno y se alimentan de leche materna." },
+            { question: "¿Los animales INVERTEBRADOS tienen esqueleto interno con columna vertebral?", options: ["Sí, todos lo tienen", "No, carecen de columna vertebral", "Solo cuando son adultos", "Solo los que viven en el mar"], correct: 1, feedback: "¡Muy bien! Los invertebrados no tienen columna vertebral ni esqueleto interno óseo." },
+            { question: "¿Cuál de los siguientes animales es un INVERTEBRADO?", options: ["Águila", "Mariposa", "Sapo", "Cocodrilo"], correct: 1, feedback: "¡Así es! La mariposa es un insecto e invertebrado." },
+            { question: "¿A qué grupo de vertebrados pertenecen las ranas y los sapos?", options: ["Anfibios", "Reptiles", "Aves", "Mamíferos"], correct: 0, feedback: "¡Correcto! Son anfibios: nacen en el agua y sufren metamorfosis para vivir en la tierra." },
+            { question: "¿Qué grupo de invertebrados representa a más del 70% de las especies animales del planeta?", options: ["Mamíferos", "Insectos", "Peces", "Aves"], correct: 1, feedback: "¡Exacto! Los insectos son el grupo de invertebrados más abundante de la Tierra." },
+            { question: "¿Cómo se clasifican las serpientes, tortugas e iguanas?", options: ["Anfibios", "Peces", "Reptiles", "Aves"], correct: 2, feedback: "¡Correcto! Son reptiles: tienen escamas y la mayoría nace de huevos en la tierra." },
+            { question: "¿Cuál de estos seres marinos es un INVERTEBRADO de cuerpo blando?", options: ["Tiburón", "Pulpo", "Ballena", "Pez Payaso"], correct: 1, feedback: "¡Excelente! El pulpo es un molusco (invertebrado) sin esqueleto." },
+            { question: "Las aves son vertebrados que se caracterizan por tener:", options: ["Pelaje y garras", "Plumas, pico y huesos huecos para volar", "Escamas secas", "Piel húmeda sin plumas"], correct: 1, feedback: "¡Bien pensado! Las plumas y sus huesos ligeros les permiten volar." },
+            { question: "¿Qué tipo de animal es la lombriz de tierra?", options: ["Vertebrado reptil", "Invertebrado tipo gusano", "Vertebrado anfibio", "Invertebrado insecto con alas"], correct: 1, feedback: "¡Fantástico! La lombriz es un anélido (gusano), un invertebrado de cuerpo blando." }
         ];
 
         let currentQuestion = 0;
@@ -150,18 +151,18 @@
         function playAnthem() {
             try {
                 const ctx = new (window.AudioContext || window.webkitAudioContext)();
-                const notes = [261.63, 293.66, 329.63, 349.23, 392.00, 440.00];
+                const notes = [330.00, 392.00, 440.00, 493.88, 523.25];
                 notes.forEach((freq, index) => {
                     const osc = ctx.createOscillator();
                     const gain = ctx.createGain();
                     osc.type = 'triangle';
                     osc.frequency.value = freq;
-                    gain.gain.setValueAtTime(0.1, ctx.currentTime + index * 0.25);
-                    gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + index * 0.25 + 0.2);
+                    gain.gain.setValueAtTime(0.1, ctx.currentTime + index * 0.22);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + index * 0.22 + 0.18);
                     osc.connect(gain);
                     gain.connect(ctx.destination);
-                    osc.start(ctx.currentTime + index * 0.25);
-                    osc.stop(ctx.currentTime + index * 0.25 + 0.2);
+                    osc.start(ctx.currentTime + index * 0.22);
+                    osc.stop(ctx.currentTime + index * 0.22 + 0.18);
                 });
             } catch(e) { console.log(e); }
         }
@@ -180,7 +181,7 @@
             const container = document.getElementById('livesContainer');
             container.innerHTML = '';
             for (let i = 0; i < 3; i++) {
-                container.innerHTML += `<i class="fa-${i < lives ? 'solid' : 'regular'} fa-droplet ${i < lives ? 'text-blue-500' : 'text-gray-300'}"></i>`;
+                container.innerHTML += `<i class="fa-${i < lives ? 'solid' : 'regular'} fa-heart ${i < lives ? 'text-red-500' : 'text-gray-300'}"></i>`;
             }
         }
 
@@ -198,7 +199,7 @@
             container.innerHTML = '';
             q.options.forEach((opt, idx) => {
                 const btn = document.createElement('button');
-                btn.className = 'w-full text-left p-4 rounded-xl border-2 border-gray-200 bg-white hover:border-blue-400 hover:bg-blue-50 font-semibold text-gray-700 transition flex items-center justify-between';
+                btn.className = 'w-full text-left p-4 rounded-xl border-2 border-gray-200 bg-white hover:border-emerald-400 hover:bg-emerald-50 font-semibold text-gray-700 transition flex items-center justify-between';
                 btn.innerHTML = `<span>${opt}</span> <i class="fa-regular fa-circle text-gray-400"></i>`;
                 btn.onclick = () => selectOption(idx);
                 container.appendChild(btn);
@@ -252,12 +253,12 @@
             document.getElementById('accuracyText').innerText = `${accuracy}%`;
 
             if (accuracy >= 80) {
-                document.getElementById('endTitle').innerText = "¡Felicidades, Maestro Guardián!";
-                document.getElementById('endSubtitle').innerText = "Has completado la misión con honores y protegido el agua del planeta.";
+                document.getElementById('endTitle').innerText = "¡Felicidades, Zoólogo Experto!";
+                document.getElementById('endSubtitle').innerText = "Has demostrado dominar a la perfección la clasificación del reino animal.";
                 if (typeof confetti === 'function') confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
             } else {
                 document.getElementById('endTitle').innerText = "¡Buen Intento, Explorador!";
-                document.getElementById('endSubtitle').innerText = "Repasa los conceptos del agua y vuelve a intentarlo para conseguir el título de Maestro.";
+                document.getElementById('endSubtitle').innerText = "Repasa las diferencias entre vertebrados e invertebrados y vuelve a intentarlo.";
             }
         }
     </script>
