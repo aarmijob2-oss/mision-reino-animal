@@ -10,7 +10,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap');
         body { font-family: 'Fredoka', sans-serif; }
-        .glass { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); }
+        .glass { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
     </style>
 </head>
 <body class="bg-gradient-to-br from-cyan-500 via-blue-600 to-indigo-900 min-h-screen flex items-center justify-center p-4">
@@ -20,7 +20,7 @@
         <div class="bg-white rounded-2xl max-w-lg w-full p-6 relative max-h-[80vh] overflow-y-auto">
             <button onclick="toggleModal(false)" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl font-bold">&times;</button>
             <h3 class="text-2xl font-bold text-blue-600 mb-4 flex items-center gap-2">
-                <i class="fa-solid font-music"></i> Letra: Los Guardianes del Agua
+                <i class="fa-solid fa-music"></i> Letra: Los Guardianes del Agua
             </h3>
             <div class="space-y-4 text-gray-700 text-sm leading-relaxed">
                 <p><strong>(Verso 1)</strong><br>El sol calienta el mar, empieza el gran viaje,<br>el agua sube al cielo buscando otro paisaje.<br>Se vuelve vapor fino, no la puedes mirar,<br>es la <strong>Evaporación</strong> que empieza a volar.</p>
@@ -148,20 +148,22 @@
         }
 
         function playAnthem() {
-            const ctx = new (window.AudioContext || window.webkitAudioContext)();
-            const notes = [261.63, 293.66, 329.63, 349.23, 392.00, 440.00];
-            notes.forEach((freq, index) => {
-                const osc = ctx.createOscillator();
-                const gain = ctx.createGain();
-                osc.type = 'triangle';
-                osc.frequency.value = freq;
-                gain.gain.setValueAtTime(0.1, ctx.currentTime + index * 0.25);
-                gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + index * 0.25 + 0.2);
-                osc.connect(gain);
-                gain.connect(ctx.destination);
-                osc.start(ctx.currentTime + index * 0.25);
-                osc.stop(ctx.currentTime + index * 0.25 + 0.2);
-            });
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const notes = [261.63, 293.66, 329.63, 349.23, 392.00, 440.00];
+                notes.forEach((freq, index) => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.value = freq;
+                    gain.gain.setValueAtTime(0.1, ctx.currentTime + index * 0.25);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + index * 0.25 + 0.2);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(ctx.currentTime + index * 0.25);
+                    osc.stop(ctx.currentTime + index * 0.25 + 0.2);
+                });
+            } catch(e) { console.log(e); }
         }
 
         function startGame() {
@@ -197,4 +199,67 @@
             q.options.forEach((opt, idx) => {
                 const btn = document.createElement('button');
                 btn.className = 'w-full text-left p-4 rounded-xl border-2 border-gray-200 bg-white hover:border-blue-400 hover:bg-blue-50 font-semibold text-gray-700 transition flex items-center justify-between';
-                btn.innerHTML
+                btn.innerHTML = `<span>${opt}</span> <i class="fa-regular fa-circle text-gray-400"></i>`;
+                btn.onclick = () => selectOption(idx);
+                container.appendChild(btn);
+            });
+        }
+
+        function selectOption(index) {
+            const q = questions[currentQuestion];
+            const buttons = document.getElementById('optionsContainer').children;
+            for (let btn of buttons) btn.disabled = true;
+
+            const feedback = document.getElementById('feedbackBox');
+            feedback.classList.remove('hidden');
+
+            if (index === q.correct) {
+                score += 100;
+                buttons[index].className = 'w-full text-left p-4 rounded-xl border-2 border-emerald-500 bg-emerald-100 font-semibold text-emerald-800 flex items-center justify-between';
+                feedback.className = 'p-4 rounded-xl text-center font-bold mb-4 bg-emerald-100 text-emerald-800 border border-emerald-300';
+                feedback.innerText = q.feedback;
+            } else {
+                lives--;
+                renderLives();
+                buttons[index].className = 'w-full text-left p-4 rounded-xl border-2 border-red-500 bg-red-100 font-semibold text-red-800 flex items-center justify-between';
+                buttons[q.correct].className = 'w-full text-left p-4 rounded-xl border-2 border-emerald-500 bg-emerald-100 font-semibold text-emerald-800 flex items-center justify-between';
+                feedback.className = 'p-4 rounded-xl text-center font-bold mb-4 bg-red-100 text-red-800 border border-red-300';
+                feedback.innerText = '¡Incorrecto! ' + q.feedback;
+            }
+
+            if (lives <= 0) {
+                setTimeout(endGame, 1500);
+            } else {
+                document.getElementById('nextBtn').classList.remove('hidden');
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                showQuestion();
+            } else {
+                endGame();
+            }
+        }
+
+        function endGame() {
+            document.getElementById('gameScreen').classList.add('hidden');
+            document.getElementById('endScreen').classList.remove('hidden');
+
+            document.getElementById('finalScore').innerText = score;
+            const accuracy = Math.round((score / 1000) * 100);
+            document.getElementById('accuracyText').innerText = `${accuracy}%`;
+
+            if (accuracy >= 80) {
+                document.getElementById('endTitle').innerText = "¡Felicidades, Maestro Guardián!";
+                document.getElementById('endSubtitle').innerText = "Has completado la misión con honores y protegido el agua del planeta.";
+                if (typeof confetti === 'function') confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+            } else {
+                document.getElementById('endTitle').innerText = "¡Buen Intento, Explorador!";
+                document.getElementById('endSubtitle').innerText = "Repasa los conceptos del agua y vuelve a intentarlo para conseguir el título de Maestro.";
+            }
+        }
+    </script>
+</body>
+</html>
